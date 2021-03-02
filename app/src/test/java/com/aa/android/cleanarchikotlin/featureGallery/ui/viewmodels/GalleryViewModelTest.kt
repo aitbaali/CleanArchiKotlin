@@ -1,8 +1,8 @@
 package com.aa.android.cleanarchikotlin.featureGallery.ui.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.aa.android.cleanarchikotlin.featureGallery.entities.IPhoto
-import com.aa.android.cleanarchikotlin.featureGallery.entities.Photo
+import com.aa.android.cleanarchikotlin.entities.IPhoto
+import com.aa.android.cleanarchikotlin.entities.Photo
 import com.aa.android.cleanarchikotlin.featureGallery.presenters.IGalleryPresenter
 import com.nhaarman.mockito_kotlin.mock
 import org.junit.Assert
