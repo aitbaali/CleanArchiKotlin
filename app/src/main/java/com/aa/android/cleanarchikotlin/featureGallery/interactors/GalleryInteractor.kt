@@ -7,8 +7,11 @@ class GalleryInteractor(
     private val repository: IRepository,
     private val presenter: IGalleryPresenter
 ) : IGalleryInteractor {
+
     override fun retrievePhotos() {
-        val photos = repository.getPhotos()
+        val photos = repository.getPhotos().map { InteractorPhotoModel(it.url) }
         presenter.retrievedPhotos(photos)
     }
 }
+
+private data class InteractorPhotoModel(override val url: String) : IInteractorPhotoModel

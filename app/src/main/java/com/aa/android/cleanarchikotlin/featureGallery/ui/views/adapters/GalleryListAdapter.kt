@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aa.android.cleanarchikotlin.R
 import com.aa.android.cleanarchikotlin.databinding.ItemPhotoBinding
-import com.aa.android.cleanarchikotlin.featureGallery.entities.IPhoto
+import com.aa.android.cleanarchikotlin.featureGallery.ui.viewmodels.IGalleryPhotoModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
-class GalleryListAdapter : ListAdapter<IPhoto, GalleryListAdapter.ViewHolder>(PHOTO_COMPARATOR) {
+class GalleryListAdapter :
+    ListAdapter<IGalleryPhotoModel, GalleryListAdapter.ViewHolder>(PHOTO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemPhotoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,7 +25,7 @@ class GalleryListAdapter : ListAdapter<IPhoto, GalleryListAdapter.ViewHolder>(PH
 
     class ViewHolder(private val binding: ItemPhotoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(photo: IPhoto) {
+        fun bind(photo: IGalleryPhotoModel) {
             binding.apply {
                 Glide.with(itemView)
                     .load(photo.url)
@@ -36,14 +37,18 @@ class GalleryListAdapter : ListAdapter<IPhoto, GalleryListAdapter.ViewHolder>(PH
     }
 
     companion object {
-        private val PHOTO_COMPARATOR = object : DiffUtil.ItemCallback<IPhoto>() {
-            override fun areItemsTheSame(oldItem: IPhoto, newItem: IPhoto): Boolean {
-                TODO("Not yet implemented")
-            }
+        private val PHOTO_COMPARATOR = object : DiffUtil.ItemCallback<IGalleryPhotoModel>() {
+            //TODO(AB-AI) Update areItemsTheSame to compare ids instead of urls
+            override fun areItemsTheSame(
+                oldItem: IGalleryPhotoModel,
+                newItem: IGalleryPhotoModel
+            ): Boolean = oldItem.url == newItem.url
 
-            override fun areContentsTheSame(oldItem: IPhoto, newItem: IPhoto): Boolean {
-                TODO("Not yet implemented")
-            }
+            //TODO(AB-AI) Update areContentsTheSame to compare data object instead of content urls
+            override fun areContentsTheSame(
+                oldItem: IGalleryPhotoModel,
+                newItem: IGalleryPhotoModel
+            ): Boolean = oldItem.url == newItem.url
         }
     }
 }
